@@ -10,10 +10,13 @@
                         Nombre del producto
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Subtitulo
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Categoria
+                        Calidad
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Material
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Precio
@@ -21,20 +24,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Cafe
-                    </td>
-                    <td class="px-6 py-4">
-                        Sombrero
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                </tr>
+                @for (sombrero of sombreros; track sombrero.id) {
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{sombrero.nombre}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{sombrero.subtitulo}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{sombrero.calidad}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{sombrero.material}}
+                        </td>
+                        <td class="px-6 py-4">
+                            $ {{sombrero.precio}}
+                        </td>
+                    </tr>
+                }
+               
                 
             </tbody>
         </table>

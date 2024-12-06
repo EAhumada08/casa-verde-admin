@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SombrerosServices } from '../sombreros.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -10,22 +12,33 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styles: ``
 })
 export class AgregarProductoComponent {
+  sombrerosService = inject(SombrerosServices);
+
+  router:Router = new Router();
   addProductForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder){
     this.addProductForm = this.formBuilder.group({
-      nombre:[''],
-      subtitulo: [''],
-      imagen:[''],
-      precio:[''],
-      calidad:[''],
-      material: [''],
-      ala: [''],
-      copa: ['']
+      nombre:['', Validators.required],
+      subtitulo: ['', Validators.required],
+      imagen:['', Validators.required],
+      precio:['', Validators.required],
+      calidad:['', Validators.required],
+      material: ['', Validators.required],
+      ala: ['', Validators.required],
+      copa: ['', Validators.required]
     })
   }
 
   onSubmit(){
-    console.log(this.addProductForm.value)
+    
+    console.log(this.addProductForm.value);
+    /*const sombrero = this.addProductForm.value;
+
+    this.sombrerosService.newSombrero(sombrero).subscribe((response) => {
+      console.log(response);
+    });*/
+    this.router.navigate(['dashboard/productos']);
+    
   }
 }
