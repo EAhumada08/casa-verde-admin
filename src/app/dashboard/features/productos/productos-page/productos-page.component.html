@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-5">
     <div>
-        <app-agregar-producto/>
+        <app-agregar-producto (childEvent)="onChildEvt()"/>
     </div>
     <div>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -21,31 +21,41 @@
                     <th scope="col" class="px-6 py-3">
                         Precio
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @for (sombrero of sombreros; track sombrero.id) {
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{sombrero.nombre}}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{sombrero.subtitulo}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{sombrero.calidad}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{sombrero.material}}
-                        </td>
-                        <td class="px-6 py-4">
-                            $ {{sombrero.precio}}
-                        </td>
-                    </tr>
+                @if (store.isLoading()===true) {
+                    <p>isLoading</p>
+                }@else {
+                    @for (sombrero of store.sombreros(); track sombrero.id) {
+
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{sombrero.nombre}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{sombrero.subtitulo}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{sombrero.calidad}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{sombrero.material}}
+                            </td>
+                            <td class="px-6 py-4">
+                                $ {{sombrero.precio}}
+                            </td>
+                            <td class="px-6 py-4">
+                                <button (click)="delete(sombrero.id)">Borrar</button>
+                            </td>
+                        </tr>
+                    }
                 }
-               
                 
             </tbody>
         </table>
-    </div>
+       </div>
 </div>
